@@ -1,7 +1,8 @@
 import '../styles/globals.css'
+import '../styles/Nav.css'
 
-function MyApp({ Component, pageProps }) {
+function MyCApp({ Component, pageProps }) {
   return <Component {...pageProps} />
 }
 
-export default MyApp
+export default MyCApp
