@@ -1,7 +1,7 @@
 import React from 'react'
 import Layouts from './layouts/layouts'
 import Data from '../data/sample'
-import { Container, Divider } from '@material-ui/core'
+import { Container, Divider, Grid } from '@material-ui/core'
 
 // import React from 'react'
 import Card from '@material-ui/core/Card';
@@ -14,38 +14,25 @@ import Typography from '@material-ui/core/Typography';
 const ProductsCards = (props) => {
     const { products } = props
 
-    const useStyles = makeStyles({
-        root: {
-            minWidth: 275,
-        },
-        bullet: {
-            display: 'inline-block',
-            margin: '0 2px',
-            transform: 'scale(0.8)',
-        },
-        title: {
-            fontSize: 14,
-        },
-        pos: {
-            marginBottom: 12,
-        },
-    });
-
-    const classes = useStyles();
-
     console.log(products)
 
     return (
-        <Card className={classes.root} variant="outlined">
-            <CardContent>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                    {products}
-                </Typography>
-                <CardActions>
-                    <Button size="small">Learn More</Button>
-                </CardActions>
-            </CardContent>
-        </Card>
+        <Grid xs={4} item={true} className="CardFood-Block">
+            <Card style={{
+                width: '96%',
+                height: '350px',
+                marginTop:"15px"
+            }} variant="outlined">
+                <CardContent>
+                    <Typography color="textSecondary" gutterBottom>
+                        {products}
+                    </Typography>
+                    <CardActions>
+                        <Button size="small">Learn More</Button>
+                    </CardActions>
+                </CardContent>
+            </Card>
+        </Grid>
 
     )
 }
@@ -53,22 +40,29 @@ const ProductsCards = (props) => {
 
 export default function Home() {
 
+
     return (
         <Layouts pageName="Home">
-            <Container maxWidth="md">
+            <Container maxWidth="lg">
                 <h2 style={{
-                    marginBottom: 10,
-                    paddingLeft: 40
+                    paddingLeft: 40,
+                    marginBottom :10
                 }}>Products Recommends</h2>
                 <Divider style={{
                     marginTop: "0",
-                    paddingTop: "0"
                 }} />
-              
-                
-                        < ProductsCards products="Test" />
-             
-              
+
+                <Grid container style={{
+                    // paddingTop: 10
+                }} justify="center">
+                    < ProductsCards products="Test" />
+                    < ProductsCards products="Test" />
+                    < ProductsCards products="Test" />
+                    < ProductsCards products="Test" />
+                    < ProductsCards products="Test" />
+                    < ProductsCards products="Test" />
+                </Grid>
+
             </Container>
         </Layouts>
     )
