@@ -1,8 +1,17 @@
+* {
+    /* Unselectable All */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 nav {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    background-color: red;
     background-color: #333;
     overflow: hidden;
     position: sticky;
@@ -12,7 +21,7 @@ nav {
 
 li.link {
     display: inline;
-    margin: 15px;
+    margin: 10px;
     color: white;
     /* t; */
 }
@@ -23,4 +32,24 @@ li.brand {
     margin-right: 15px;
     font-size: larger;
     font-weight: 900;
+}
+
+.nav-button {
+    display: inline-block;
+    border-radius: 5px;
+    margin-left: 0;
+    left: 0;
+    padding: 3px;
+    height: 2rem;
+    width: 4rem;
+    text-align: center;
+}
+
+.nav-button:hover {
+    background-color: #545454;
+}
+
+.nav-right {
+    right: 0;
+    display: inline-block;
 }
