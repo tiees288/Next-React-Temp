@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -59,7 +59,10 @@ const LoginModal = (props) => {
     const classes = useStyles();
     const { openLogin, setopenLogin } = props
 
-    console.log('Open : ' + openLogin)
+    const [loginText, setloginText] = useState('')
+    const [passwordText, setpasswordText] = useState('')
+
+    // console.log('Open : ' + openLogin)
 
     // const handleOpen = () => {
     //     setopenLogin(true);
@@ -68,6 +71,15 @@ const LoginModal = (props) => {
     const handleClose = () => {
         setopenLogin(false);
     };
+
+    const handleLogin = (e, username, password) => {
+        e.preventDefault()
+        console.log(username + ' ' + password)
+
+        // Post Login Data
+
+
+    }
 
     return (
         <div>
@@ -104,9 +116,13 @@ const LoginModal = (props) => {
                                 fullWidth
                                 id="email"
                                 label="Username"
-                                name="email"
-                                autoComplete="email"
+                                name="Username"
+                                autoComplete="Username"
                                 autoFocus
+                                onChange={(e) => {
+                                    setloginText(e.target.value)
+                                }
+                                }
                             />
                             <TextField
                                 variant="outlined"
@@ -118,6 +134,9 @@ const LoginModal = (props) => {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                onChange={(e) => {
+                                    setpasswordText(e.target.value)
+                                }}
                             />
                             {/* <FormControlLabel
                                     control={<Checkbox value="remember" color="primary" />}
@@ -129,6 +148,7 @@ const LoginModal = (props) => {
                                 variant="contained"
                                 color="primary"
                                 className={classes.submit}
+                                onClick={(e) => handleLogin(e, loginText, passwordText)}
                             >Sign In
                                 </Button>
                             <Grid container>
