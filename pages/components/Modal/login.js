@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -39,10 +40,14 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2, 4, 3)
     },
     closeBtn: {
-        border: '1px solid',
+        // border: '1px solid',
+        backgroundColor:'white',
+        borderRadius:150,
+        height:24,
         position:'absolute',
-        top: -7,
-        right: -7
+        top: -8,
+        right: -8,
+        cursor: 'pointer'
     },
     avatar: {
         margin: theme.spacing(1),
@@ -120,7 +125,7 @@ const LoginModal = (props) => {
                 }}>
                     <div className={classes.paper}>
                         <div className={classes.closeBtn}>
-                            X
+                            <CancelIcon onClick={()=> handleClose()} />
                         </div>
                         <div className={classes.paperBody}>
 
@@ -135,13 +140,16 @@ const LoginModal = (props) => {
                                     fullWidth
                                     id="email"
                                     label="Username"
+                                    autoComplete='off'
                                     name="Username"
-                                    autoComplete="Username"
+                                    // autoComplete="Username"
                                     autoFocus
+                                    disabled={clickLogin === true ? 'disabled' : ''}
                                     onChange={(e) => {
                                         setloginText(e.target.value)
                                     }
                                     }
+                                    
                                 />
                                 <TextField
                                     variant="outlined"
@@ -156,6 +164,7 @@ const LoginModal = (props) => {
                                     onChange={(e) => {
                                         setpasswordText(e.target.value)
                                     }}
+                                    disabled={clickLogin === true ? 'disabled' : ''}
                                 />
                                 {/* <FormControlLabel
                                     control={<Checkbox value="remember" color="primary" />}
