@@ -5,20 +5,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import CancelIcon from '@material-ui/icons/Cancel';
 
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-// import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import { colors, CircularProgress } from '@material-ui/core';
-import { spacing } from '@material-ui/system';
+import { CircularProgress, TextField, Button, Link, Typography, Grid } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         outline: 'none',
-        position:'relative'
+        position: 'relative'
     },
     paperBody: {
         border: 0,
@@ -41,10 +28,10 @@ const useStyles = makeStyles((theme) => ({
     },
     closeBtn: {
         // border: '1px solid',
-        backgroundColor:'white',
-        borderRadius:150,
-        height:24,
-        position:'absolute',
+        backgroundColor: 'white',
+        borderRadius: 150,
+        height: 24,
+        position: 'absolute',
         top: -8,
         right: -8,
         cursor: 'pointer'
@@ -78,7 +65,10 @@ const LoginModal = (props) => {
     const classes = useStyles();
     const { openLogin, setopenLogin } = props
 
-    const [loginText, setloginText] = useState('')
+    const [loginText, setloginText] = useState({
+        text: '',
+        errorText: ''
+    })
     const [passwordText, setpasswordText] = useState('')
     const [clickLogin, setclickLogin] = useState(false)
 
@@ -96,7 +86,11 @@ const LoginModal = (props) => {
             console.log('Invalid Login.')
             setclickLogin(false)
         } else {
-            console.log(username + ' ' + password)
+            let payload = {
+                username: username,
+                password: password
+            }
+            console.log(payload)
         }
 
         // Post Login Data
@@ -125,7 +119,7 @@ const LoginModal = (props) => {
                 }}>
                     <div className={classes.paper}>
                         <div className={classes.closeBtn}>
-                            <CancelIcon onClick={()=> handleClose()} />
+                            <CancelIcon onClick={() => handleClose()} />
                         </div>
                         <div className={classes.paperBody}>
 
@@ -138,18 +132,23 @@ const LoginModal = (props) => {
                                     margin="normal"
                                     required
                                     fullWidth
-                                    id="email"
+                                    id="Username"
                                     label="Username"
+                                    // error='Error'
+                                    helperText={loginText.errorText}
                                     autoComplete='off'
                                     name="Username"
-                                    // autoComplete="Username"
                                     autoFocus
-                                    disabled={clickLogin === true ? 'disabled' : ''}
+                                    disabled={clickLogin === true ? true : false}
                                     onChange={(e) => {
-                                        setloginText(e.target.value)
+                                        setloginText(
+                                            {
+                                                text: e.target.value
+                                            }
+                                        )
                                     }
                                     }
-                                    
+
                                 />
                                 <TextField
                                     variant="outlined"
@@ -164,7 +163,7 @@ const LoginModal = (props) => {
                                     onChange={(e) => {
                                         setpasswordText(e.target.value)
                                     }}
-                                    disabled={clickLogin === true ? 'disabled' : ''}
+                                    disabled={clickLogin === true ? true : false}
                                 />
                                 {/* <FormControlLabel
                                     control={<Checkbox value="remember" color="primary" />}
@@ -179,7 +178,7 @@ const LoginModal = (props) => {
 
                                     className={classes.submit}
                                     onClick={(e) => {
-                                        handleLogin(e, loginText, passwordText)
+                                        handleLogin(e, loginText.text, passwordText)
                                     }}>
                                     {
                                         clickLogin === true ? <div style={{

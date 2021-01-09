@@ -3,10 +3,12 @@ import Head from 'next/head'
 import React, { useState } from 'react'
 import { Grid } from "@material-ui/core"
 import LoginModal from '../Modal/login'
+import RegisterModal from '../Modal/register'
 
 export default function Nav(props) {
 
   const [openLogin, setopenLogin] = useState(false)
+  const [openRegister, setopenRegister] = useState(false)
   const handleOpen = (setState) => {
     setState(true);
   };
@@ -55,7 +57,13 @@ export default function Nav(props) {
               </div>
               <div className="nav-button" style={{ width: "5rem" }}>
                 <li className="link">
-                  <Link href="/"  >Register</Link>
+                  <a style={{
+                    cursor: "pointer"
+                  }} onClick={() => {
+                    if (openRegister === false) {
+                      handleOpen(setopenRegister)
+                    }
+                  }}>Register</a>
                 </li>
               </div>
             </Grid>
@@ -63,6 +71,7 @@ export default function Nav(props) {
         </ul>
       </nav >
       <LoginModal openLogin={openLogin} setopenLogin={setopenLogin} />
+      <RegisterModal openRegister={openRegister} setopenRegister={setopenRegister} />
     </React.Fragment>
   )
 }
